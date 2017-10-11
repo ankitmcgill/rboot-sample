@@ -22,16 +22,6 @@ extern "C" {
 #define UPGRADE_FLAG_START		0x01
 #define UPGRADE_FLAG_FINISH		0x02
 
-typedef struct {
-	uint8 rom_slot;   // rom slot to update, or FLASH_BY_ADDR
-	ota_callback callback;  // user callback when completed
-	uint32 total_len;
-	uint32 content_len;
-	struct espconn *conn;
-	ip_addr_t ip;
-	rboot_write_status write_status;
-} upgrade_status;
-
 static upgrade_status *upgrade;
 static os_timer_t ota_timer;
 

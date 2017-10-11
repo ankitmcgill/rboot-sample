@@ -15,6 +15,7 @@
 extern "C" {
 #endif
 
+
 // ota server details
 #define OTA_HOST "192.168.7.5"
 #define OTA_PORT 80
@@ -42,6 +43,17 @@ typedef void (*ota_callback)(bool result, uint8 rom_slot);
 
 // function to perform the ota update
 bool ICACHE_FLASH_ATTR rboot_ota_start(ota_callback callback);
+
+typedef struct {
+	uint8 rom_slot;   // rom slot to update, or FLASH_BY_ADDR
+	ota_callback callback;  // user callback when completed
+	uint32 total_len;
+	uint32 content_len;
+	struct espconn *conn;
+	ip_addr_t ip;
+	rboot_write_status write_status;
+} upgrade_status;
+
 
 #ifdef __cplusplus
 }
